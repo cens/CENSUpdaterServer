@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>CENS Updater</title>
+</head>
+
+<body style="background-color: rgb(255, 255, 255);" link="#0000ff"  vlink="#0000ff">
+
+
+
+<table border="0" cellpadding="3"  width="100%">
+    <tr>
+        <td width="90%">
+        </td>
+        <td>
+        <font size="4"> 
+        <a href="https://systemsens.cens.ucla.edu/systemlog/logs/logout/">logout</a>
+        </td>
+
+    </tr>
+</table>
+<table bgcolor="#eeeeee" border="0" cellpadding="3"  width="100%">
+<tbody>
+   <tr>
+      <td  valign="top"  align="left">
+          <p>
+          <font size="6" width="5%">
+              <b>
+                  <a
+                      href="https://systemsens.cens.ucla.edu/updates/updater/">
+                  CENS Updater
+                  </a>
+              </b>
+          </p>
+      </td>
+
+      <td  valign="top"  align="center" >
+     </td>
+   </tr>
+</tbody>
+</table>
+
+
+
+
+<br>
+<br>
+<!-- <font size=4>{{debug}}</font><hr> -->
+<br>
+<font size=5>{{message}}</font>
+<br>
+
+<form method="post", name="userForm">
+
+    <table bgcolor="#e0e0e0" border="1" width="100%" 
+        cellspacing="10" rules=rows>
+    <tbody>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>IMEI</strong></font>
+        </td>
+        <td width="20%">
+            <font size="4"><strong>Group</strong> (optional)</font>
+        </td>
+
+        <td width="60%">
+            <font size="4"><strong>Applications</strong></font>
+        </td>
+    </tr>
+    <tr>
+
+        <td> 
+            <input type="text" name="user_imei"
+            {% if user %}
+            value = {{user.imei}}
+            {% else %}
+            value = ""
+            {% endif %}
+
+            />
+        </td>
+
+        <td> 
+            <input type="text" name="user_group"
+            {% if group %}
+            value = {{group}}
+            {% else %}
+            value = ""
+            {% endif %}
+            />
+
+
+        </td>
+
+        <td> 
+
+            <table bgcolor="#e0e0e0" border="1" width="100%" 
+                cellspacing="10" rules=rows>
+            <tbody>
+            <tr>
+                <td width="1%">
+                    <font size="4"></font>
+                </td>
+
+                <td width="1%">
+                    <font size="4"><strong>Name</strong></font>
+                </td>
+                <td width="1%">
+                    <font size="4"><strong>Version</strong></font>
+                </td>
+
+                <td width="10%">
+                    <font size="4"><strong>Release</strong></font>
+                </td>
+                <td width="10%">
+                    <font size="4"><strong>Package</strong></font>
+                </td>
+
+
+            </tr>
+            {% for app in apps %}
+            <tr>
+
+                <td>
+                    <input type=checkbox
+                    {% if app.checked %}
+                    checked
+                    {% endif %}
+                    name={{app.package}}({{app.release}})
+                    >
+
+                </td>
+                <td> 
+                    {{app.name}}    
+                </td>
+
+                <td> 
+                    {{app.ver}}    
+                </td>
+
+                <td> 
+                    {{app.release}}    
+                </td>
+                <td> 
+                    {{app.package}}    
+                </td>
+
+
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+
+
+        </td>
+    </tr>
+    </tbody>
+    </table>
+    <input type=submit name="save" value="Save">
+    <input type=submit name ="delete" value="Delete">
+    <input type=submit name ="cancel" value="Cancel">
+
+</form>
+
+
+{% if user %}
+<p>
+<font size=5>Last logged application:</font>
+<table bgcolor="#e0e0e0" border="1" width="100%" cellspacing="10" rules=rows>
+    <tbody>
+        <tr width="10%">
+            <td><strong>Date</strong></td>
+            <td><strong>{{logdate1}}</strong></td>
+            <td><strong>{{logdate2}}</strong></td>
+        </tr>
+        <tr>
+            <td><strong>Applications</strong></td>
+            <td width="35%">
+                <table bgcolor="#e0e0e0" border="1" width="100%" cellspacing="10" rules=rows>
+                    <tbody>
+                        {% for app in loggedapps1 %}
+                        <tr>
+                            <td width="60%">
+                                {{app.package}}
+                            </td>
+                            <td>
+                                {{app.ver}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+            <td width="35%">
+                <table bgcolor="#e0e0e0" border="1" width="100%" cellspacing="10" rules=rows>
+                    <tbody>
+                        {% for app in loggedapps2 %}
+                        <tr>
+                            <td width="60%">
+                                {{app.package}}
+                            </td>
+                            <td>
+                                {{app.ver}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>
+</p>
+
+{% endif %}
+
+
+</body>
+</html>
+

@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>CENS Updater</title>
+</head>
+
+<body style="background-color: rgb(255, 255, 255);" link="#0000ff"  vlink="#0000ff">
+
+
+
+<table border="0" cellpadding="3"  width="100%">
+    <tr>
+        <td width="90%">
+        </td>
+        <td>
+        <font size="4"> 
+        <a href="https://systemsens.cens.ucla.edu/systemlog/logs/logout/">logout</a>
+        </td>
+
+    </tr>
+</table>
+<table bgcolor="#eeeeee" border="0" cellpadding="3"  width="100%">
+<tbody>
+   <tr>
+      <td  valign="top"  align="left">
+          <p>
+          <font size="6" width="5%">
+              <b>
+                  <a
+                      href="https://systemsens.cens.ucla.edu/updates/updater/">
+                  CENS Updater
+                  </a>
+              </b>
+          </p>
+      </td>
+
+      <td  valign="top"  align="center" >
+     </td>
+   </tr>
+</tbody>
+</table>
+
+
+
+
+<br>
+<br>
+<!-- <font size=4>{{debug}}</font> <hr> -->
+<br>
+<font size=5>{{message}}</font>
+<br>
+
+<form method="post", name="appForm">
+
+    <table bgcolor="#e0e0e0" border="1" width="100%" 
+        cellspacing="10" rules=rows>
+    <tbody>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>Name</strong></font>
+        </td>
+        <td> 
+            <input type="text" name="app_name"
+            size="100%"
+            {% if app %}
+            value = {{app.name}}
+            {% else %}
+            value = ""
+            {% endif %}
+
+            />
+        </td>
+
+    </tr>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>Version</strong></font>
+        </td>
+        <td> 
+            <input type="text" name="app_ver"
+            size="100%"
+            {% if app %}
+            value = {{app.ver}}
+            {% else %}
+            value = ""
+            {% endif %}
+
+            />
+        </td>
+
+
+    </tr>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>Release</strong></font>
+        </td>
+        <td> 
+            <input type="text" name="app_release"
+            size="100%"
+            {% if app %}
+            value = {{app.release}}
+            {% else %}
+            value = ""
+            {% endif %}
+            />
+        </td>
+    </tr>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>Package</strong></font>
+        </td>
+        <td> 
+            <input type="text" name="app_package"
+            size="100%"
+            {% if app %}
+            value = {{app.package}}
+            {% else %}
+            value = ""
+            {% endif %}
+            />
+        </td>
+
+    </tr>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>URL</strong></font>
+        </td>
+        <td> 
+            <input type="text" name="app_url"
+            size="100%"
+            {% if app %}
+            value = {{app.url}}
+            {% else %}
+            value = ""
+            {% endif %}
+            />
+        </td>
+    </tr>
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>Action</strong></font>
+        </td>
+        <td> 
+            <select name=action value=''>
+            {% for i in actions %}
+            {% ifequal i action  %}
+            <option value={{i}} selected>{{i}}</option>
+            {% else %}
+            <option value={{i}}>{{i}}</option>
+            {% endifequal %}
+            {% endfor %}
+            </select>
+        </td>
+    </tr>
+
+
+
+    <tr>
+        <td width="20%">
+            <font size="4"><strong>User Groups</strong></font>
+        </td>
+        <td>
+
+            <table bgcolor="#e0e0e0" border="0" width="100%"
+                cellspacing="0" rules=void>
+            <tbody>
+                {% for group in groups %}
+                <tr>
+                    <td width="1%" align="left">
+                        <input type=checkbox
+                        {% if group.checked %}
+                        checked
+                        {% endif %}
+                        name = {{group.name}}>
+                    </td>
+                    <td align="left" >
+                        {{group.name}}
+                        ({{group.users}} users)
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+
+        </td>
+
+    </tr>
+    </tbody>
+    </table>
+    <input type=submit name="save" value="Save">
+    <input type=submit name ="delete" value="Delete">
+    <input type=submit name ="cancel" value="Cancel">
+
+</form>
+
+</body>
+</html>
+

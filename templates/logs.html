@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>CENS Updater</title>
+</head>
+
+<body style="background-color: rgb(255, 255, 255);" link="#0000ff"  vlink="#0000ff">
+
+
+
+<table border="0" cellpadding="3"  width="100%">
+    <tr>
+        <td width="90%">
+        </td>
+        <td>
+        <font size="4"> 
+        <a href="https://systemsens.cens.ucla.edu/systemlog/logs/logout/">logout</a>
+            {{user}}
+        </td>
+
+    </tr>
+</table>
+<table bgcolor="#eeeeee" border="0" cellpadding="3"  width="100%">
+<tbody>
+   <tr>
+      <td  valign="top"  align="left">
+          <p>
+          <font size="6" width="5%">
+              <b>
+                  <a
+                      href="https://systemsens.cens.ucla.edu/updates/updater/">
+                  CENS Updater
+                  </a>
+              </b>
+          </p>
+      </td>
+
+      <td  valign="top"  align="center" >
+     </td>
+   </tr>
+</tbody>
+</table>
+
+
+
+
+<br>
+<br>
+<br>
+<font size=5>{{message}}</font>
+<br>
+
+
+    <table bgcolor="#e0e0e0" border="1" width="50%" 
+        cellspacing="10" rules=rows>
+    <tbody>
+    <tr>
+        <td width="30%">
+            <font size="4"><strong>IMEI</strong></font>
+        </td>
+        <td width="50%">
+            <font size="4"><strong>Access Time</strong></font>
+        </td>
+
+        <td width="20%">
+            <font size="4"><strong>Access Count</strong></font>
+        </td>
+    </tr>
+
+    {% for log in logs %}
+    <tr>
+        <td> 
+            <a
+                href="https://systemsens.cens.ucla.edu/updates/updater/add_user/{{log.imei}}">
+            {{log.imei}}
+        </a>
+        </td>
+        <td>
+            {{log.time}}
+        </td>
+        <td>
+            {{log.count}}
+        </td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+
+</body>
+</html>
+

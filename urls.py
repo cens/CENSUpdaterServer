@@ -6,6 +6,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('updater.views',
     (r'^updater/get/(?P<imei>\w*)$', 'get'),
+    (r'^updater/register/', 'register'),
     (r'^updater/$', 'index'),
     (r'^updater/add_user/(?P<imei>\w*)$', 'add_user'),
     (r'^updater/add_app/(?P<app_str>\w*)$', 'add_app'),

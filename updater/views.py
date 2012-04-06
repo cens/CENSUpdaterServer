@@ -4,8 +4,8 @@ from django.template import Context, loader
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from django.http import HttpResponse, HttpResponseRedirect
-from updater.models import App, User, Group, Logs
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest
+from updater.models import App, User, Group, Logs, REGISTRY
 import simplejson
 import datetime
 from pytz import timezone
@@ -159,6 +159,95 @@ def get(request, imei):
 
     return response
 
+def register(request):
+
+    response = HttpResponse("{'result': 'success'}")
+
+    mydebug = open('/tmp/updaterdebug.txt', 'a')
+
+
+    if request.method == 'POST':
+        info_str = request.POST['info']
+        mydebug.write(info_str + '\n')
+
+
+        info = simplejson.loads(info_str)
+
+        if 'id' in info.keys():
+            id_imei = info['id']
+            mydebug.write(id_imei + '\n')
+        else:
+            mydebug.close()
+            return HttpResponseBadRequest("{'result': 'Missing id'}")
+
+        if 'sim_id' in info.keys():
+            sim_id = info['sim_id']
+            mydebug.write(sim_id + '\n')
+        else:
+            mydebug.close()
+            return HttpResponseBadRequest("{'result': 'Missing sim_id'}")
+
+        if 'asset_tag' in info.keys():
+            asset_tag = info['asset_tag']
+            mydebug.write(asset_tag + '\n')
+        else:
+            mydebug.close()
+            return HttpResponseBadRequest("{'result': 'Missing asset_tag'}")
+
+        
+        if 'phone_number' in info.keys():
+            phone_number = info['phone_number']
+            mydebug.write(phone_number + '\n')
+        else:
+            mydebug.close()
+            return HttpResponseBadRequest("{'result': 'Missing phone_number'}")
+
+
+        if 'group_name' in info.keys():
+            group_name = info['group_name']
+            mydebug.write(group_name + '\n')
+        else:
+            mydebug.close()
+            return HttpResponseBadRequest("{'result': 'Missing group_name'}")
+
+
+
+        reg_q = REGISTRY.objects.filter(imei = id_imei)
+
+        if reg_q.count() > 0:
+            user_rec = reg_q[0]
+            user_rec.simid = sim_id
+            user_rec.phone = phone_number
+            user_rec.assettag = asset_tag
+            user_rec.save()
+        else:
+            reg_entry = REGISTRY(imei=id_imei, simid=sim_id, phone=phone_number, assettag=asset_tag)
+
+            reg_entry.save()
+
+
+        user_q = User.objects.filter(imei__exact = id_imei)
+        if len(user_q) > 0:
+            myuser = user_q.all()[0]
+        else:
+            myuser = User()
+
+
+        myuser.imei = id_imei
+
+        myuser.save()
+
+        if len(myuser.group.all()) == 0:
+            myuser.group.add(findGroup(group_name, myuser))
+
+        myuser.save()
+
+
+
+    mydebug.close()
+    return response
+
+
 
 @login_required
 def index(request):
@@ -294,7 +383,7 @@ def add_user(request, imei):
         if count > 1:
             access2 =  local_time_str( log_q.all()[count - 2].access )
 
-            access2 = str(log_q.all()[count - 2].access)
+            #access2 = str(log_q.all()[count - 2].access)
             packages_str = str(log_q.all()[count - 2].packages)
             packages = simplejson.loads(packages_str)
             for package in packages.keys():

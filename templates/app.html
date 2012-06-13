@@ -15,7 +15,7 @@
         </td>
         <td>
         <font size="4"> 
-        <a href="https://systemsens.cens.ucla.edu/systemlog/logs/logout/">logout</a>
+        <a href="../login/">logout</a>
         </td>
 
     </tr>
@@ -28,7 +28,7 @@
           <font size="6" width="5%">
               <b>
                   <a
-                      href="https://systemsens.cens.ucla.edu/updates/updater/">
+                      href="/">
                   CENS Updater
                   </a>
               </b>
@@ -52,6 +52,7 @@
 <br>
 
 <form method="post", name="appForm">
+{% csrf_token %}
 
     <table bgcolor="#e0e0e0" border="1" width="100%" 
         cellspacing="10" rules=rows>

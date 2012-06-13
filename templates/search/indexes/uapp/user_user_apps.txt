@@ -1,0 +1,4 @@
+{% for app in object.user_apps.all %}
+{{app.name}}_{{app.release}}_{{app.ver}}
+{% endfor %}
+

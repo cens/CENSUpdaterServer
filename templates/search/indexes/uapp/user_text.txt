@@ -1,0 +1,18 @@
+{{ object.name }}
+{{ object.imei }}
+{% for grp in object.group.all %}
+{{ grp.name }}
+   {% for grpapp in grp.apps.all %}
+   {{ grpapp.name }}
+   {{ grpapp.release }}
+   {{ grpapp.ver }}
+   {{grpapp.name}}_{{grpapp.release}}_{{grpapp.ver}}
+   {% endfor %}
+{% endfor %}
+{% for app in object.user_apps.all %}
+{{ app.name }}
+{{ app.release }}
+{{ app.ver }}
+{{app.name}}_{{app.release}}_{{app.ver}}
+{% endfor %}
+

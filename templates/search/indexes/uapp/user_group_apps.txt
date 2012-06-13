@@ -1,0 +1,5 @@
+{% for grp in object.group.all %}
+{% for grpapp in grp.apps.all %}
+{{grpapp.name}}_{{grpapp.release}}_{{grpapp.ver}}
+{% endfor %}
+{% endfor %}

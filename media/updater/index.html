@@ -1,0 +1,291 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title id="page-title">CENS Updater</title>
+
+    <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css">
+	<link rel="stylesheet" type="text/css" href="../extjs/examples/shared/example.css" />
+	<link rel="stylesheet" type="text/css" href="./ux/css/LiveSearchGridPanel.css" />
+	<link rel="stylesheet" type="text/css" href="./ux/statusbar/css/statusbar.css" />
+   
+    <script type="text/javascript" src="../extjs/ext-debug.js"></script>
+    
+    <script type="text/javascript" src="app.js"></script>
+
+    <style type="text/css" media="screen">
+        /**
+         * Icons
+         */
+
+        .summary {
+             background-image: url(images/details.gif) !important;
+        }
+
+        .reading {
+             background-image: url(images/article.gif) !important;
+        }
+
+        .post-go {
+            background-image: url(images/post_go.gif) !important;
+        }
+
+        .tab-new {
+            background-image: url(images/tab_new.gif) !important;
+        }
+
+        .feed-add {
+            background-image: url(images/rss_add.gif) !important;
+        }
+
+        .feed-remove {
+            background-image: url(images/rss_delete.gif) !important;
+        }
+
+        .feed-load {
+            background-image: url(images/rss_load.gif) !important;
+        }
+
+        .details {
+            background-image: url(images/details.gif) !important;
+        }
+
+        .open-all {
+            background-image: url(images/tabs.gif) !important;
+        }
+
+        .feed {
+            width: 16px;
+            height: 16px;
+            background-image: url(images/rss.gif) !important;
+        }
+
+        /**
+         * Other styles
+         */
+        .feed-picker-url {
+            float: left;
+            width: 425px;
+        }
+        .feed-picker-title {
+        /*    float: left;*/
+            color: #777;
+            font-size: 10px;
+        }
+
+        .feed-list {
+            padding: 0 3px 0 3px;
+        }
+
+        .section-list-item {
+            /*margin-top: 3px;
+            padding-left: 40px;
+            font-size: 13px;
+            line-height: 38px;
+            cursor: pointer;
+            background: url(images/user_icon.png) no-repeat 0 2px;
+            border: 1px solid #fff;*/
+            border: 1px solid #fff;
+
+        }
+		
+		.section-list-item .clients {
+			margin-top: 3px;
+            padding-left: 40px;
+            font-size: 13px;
+            line-height: 38px;
+            cursor: pointer;
+            background: url(images/icon_clients.png) no-repeat 0 2px;
+		}
+		
+		.section-list-item .groups {
+			margin-top: 3px;
+            padding-left: 40px;
+            font-size: 13px;
+            line-height: 38px;
+            cursor: pointer;
+            background: url(images/icon_groups.png) no-repeat 0 2px;
+		}
+		
+		.section-list-item .applications {
+			margin-top: 3px;
+            padding-left: 40px;
+            font-size: 13px;
+            line-height: 38px;
+            cursor: pointer;
+            background: url(images/icon_applications.png) no-repeat 0 2px;
+		}
+		
+		.section-list-item .inventory {
+			margin-top: 3px;
+            padding-left: 40px;
+            font-size: 13px;
+            line-height: 38px;
+            cursor: pointer;
+            background: url(images/icon_inventory.png) no-repeat 0 2px;
+		}
+		
+		.section-list-item .logs {
+			margin-top: 3px;
+            padding-left: 40px;
+            font-size: 13px;
+            line-height: 38px;
+            cursor: pointer;
+            background: url(images/icon_logs.png) no-repeat 0 2px;
+		}
+
+        .feed-list .x-item-selected {
+            font-weight: bold;
+            color: #15428B;
+            background-color: #DFE8F6;
+            border: 1px dotted #A3BAE9;
+        }
+
+        .feed-list-item-hover {
+            background-color: #eee;
+        }
+
+        .topic {
+            padding: 2px 0 0 20px;
+            background:transparent url(images/post.gif) no-repeat;
+        }
+
+        .topic b {
+            font-family: tahoma, verdana;
+            display: block;
+            color: #333;
+        }
+
+        .author: {
+            color: #333
+        }
+
+        .post-date {
+            font-weight:bold;
+            color:#333;
+        }
+
+        .feed-grid .x-grid-rowbody {
+            margin: 5px 20px 10px 25px !important;
+            color: #555;
+            font-size: 11px;
+        }
+
+        /* Preview classes */
+
+        .preview .x-panel-body {
+            background:#fff;
+            color:#222;
+            font:normal 12px tahoma,verdana,arial,sans-serif;
+        }
+
+        .preview .x-panel-body p {
+            line-height:18px;
+            margin:8px 0;
+        }
+
+        .preview .x-panel-body ul {
+            margin-left:18px;
+        }
+
+        .preview .x-panel-body ul li {
+            display:list-item;
+            list-style-image:none !important;
+            list-style-position:outside !important;
+            list-style-type:disc !important;
+            margin-left:18px;
+        }
+
+        .preview .x-panel-body pre, #preview .x-panel-body code {
+            background:#f1f1f1;
+            display:block;
+        }
+
+        .preview .x-panel-body h4.post-author {
+            font-weight:normal;
+            color:#555;
+            font-size:11px;
+        }
+        .preview .x-panel-body span.post-date {
+            font-weight:normal;
+            color:#555;
+            float:right;
+            font-size:11px;
+        }
+        .preview .x-panel-body div.post-data {
+            background:#f1f2f4;
+            padding:5px;
+            border-bottom:1px solid #dadadb;
+        }
+        .preview .x-panel-body div.post-body {
+            padding:10px;
+        }
+
+        .x-tab-bar-body {
+            border-width: 1px 1px 0 1px !important;
+        }
+		
+		.icon-clear-group {
+		            background-image:url(../extjs/examples/shared/icons/fam/control_rewind.png) !important;
+		}
+
+		.x-form-itemselector-body .x-form-item {
+		    margin: 0;
+		}
+
+		.x-form-itemselector-add {
+		    background-image: url(ux/css/images/right2.gif);
+		}
+		.x-form-itemselector-remove {
+		    background-image: url(ux/css/images/left2.gif);
+		}
+		.add16 {
+		    background-image: url(./images/add16.gif) !important;
+		}
+		
+		.ui-icon-search {
+			background-image: url(./images/ui-icon-search.png) !important;
+		}
+		
+		.ui-icon-add-user {
+			background-image: url(./images/ui-icon-add-user.png) !important;
+		}
+		
+		.ui-icon-delete-user {
+			background-image: url(./images/ui-icon-delete-user.png) !important;
+		}
+
+		.ui-icon-edit-user {
+			background-image: url(./images/ui-icon-edit-user.png) !important;
+		}
+		
+		.ui-icon-grid-reset {
+			background-image: url(./images/ui-icon-grid-reset.png) !important;
+		}
+		
+		.ui-icon-select-all {
+			background-image: url(./images/ui-icon-select-all.png) !important;
+		}
+		
+		.ui-icon-deselect-all {
+			background-image: url(./images/ui-icon-deselect-all.png) !important;
+		}
+				
+		td.wrap-text div {
+		    white-space: normal;
+		}
+		
+		.strike-through-row .x-grid-cell {
+		    text-decoration: line-through;
+		}
+
+		/* No strike-through for the checkbox */
+	/*	.strike-through-row .x-grid-cell-first {
+		    text-decoration: none;
+		}*/
+
+    </style>
+</head>
+<body>
+
+</body>
+</html>

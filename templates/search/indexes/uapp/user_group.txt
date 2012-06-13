@@ -1,0 +1,3 @@
+{% for grp in object.group.all %}
+{{grp.name}}
+{% endfor %}

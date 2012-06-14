@@ -104,5 +104,5 @@ HAYSTACK_WHOOSH_PATH = '/home/william/whoosh'
 
 LOGIN_URL = '/uproject/uapp/login/'
 LOGOUT_URL = '/uproject/uapp/login/'
-LOGIN_REDIRECT_URL = '/uproject/uapp/'
+LOGIN_REDIRECT_URL = '/uproject/media/updater/'
 CACHE_BACKEND = 'db://listclient_cache'

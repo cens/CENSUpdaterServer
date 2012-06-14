@@ -30,7 +30,7 @@ urlpatterns = patterns('uapp.views',
 	(r'^uapp/logs/$', 'logs'),
 	(r'^uapp/get/(?P<imei>\w*)$', 'get'),
 	(r'^uapp/register/', 'register'),
-	(r'^uapp/$', 'index'),
+	#(r'^uapp/$', 'index'),
 	
 	
 	

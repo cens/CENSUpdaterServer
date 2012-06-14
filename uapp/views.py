@@ -231,6 +231,7 @@ def register(request):
             #return HttpResponseBadRequest("{'result': 'Missing group_name'}")
 
 
+        
 
         #reg_q = REGISTRY.objects.filter(imei = id_imei)
 
@@ -255,6 +256,10 @@ def register(request):
 
 
         myuser.imei = id_imei
+
+        # TEMPORARY for migration by Will Wu
+        #if 'manual_tags' in info.keys():
+        #    myuser.manual_tags = info['manual_tags']
 
         if not myuser.locked_inventory:
   	        myuser.simid = sim_id
@@ -333,16 +338,21 @@ def listClients(request):
 	sqs = None
 	sqstring = 'SearchQuerySet()'
 	
-	a = ('pgroup' in locals())
-	b = ('puser_apps' in locals())
-	c = ('pgroup_apps' in locals())
-	d = ('pphone_tags' in locals())
-	e = ('pmanual_tags' in locals())
+	#a = ('pgroup' in locals())
+	#b = ('puser_apps' in locals())
+	#c = ('pgroup_apps' in locals())
+	#d = ('pphone_tags' in locals())
+	#e = ('pmanual_tags' in locals())
+	a = ('group' in request.POST)
+	b = ('user_apps' in request.POST)
+	c = ('group_apps' in request.POST)
+	d = ('phone_tags' in request.POST)
+	e = ('manual_tags' in request.POST)
 	
 	# Construct a specialized search query, given the search parameters	
 	if 'pbasic' in locals():
-		for b in pbasic:
-			sqstring += '.filter(content="' + str(b) + '")'
+		for qry in pbasic:
+			sqstring += '.filter(content="' + str(qry) + '")'
 		sqs = eval(sqstring)
 		
 	'''if a and b and c:

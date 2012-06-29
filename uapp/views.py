@@ -56,7 +56,7 @@ class LogRecord:
         self.imei = imei
         self.time = dt
         self.count = count
-
+			
 def local_time_str(naive_t):
     utc_t = naive_t.replace(tzinfo = timezone('UTC'))
     local_t = utc_t.astimezone(timezone('US/Pacific'))
@@ -308,7 +308,7 @@ def index(request):
 
 
     return HttpResponse(t.render(c))
-
+	
 @login_required
 def listClients(request):
 	# Check for advanced search parameters

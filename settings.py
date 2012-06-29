@@ -67,7 +67,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
@@ -103,6 +103,6 @@ HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = '/home/william/whoosh'
 
 LOGIN_URL = '/uproject/uapp/login/'
-LOGOUT_URL = '/uproject/uapp/login/'
+LOGOUT_URL = '/uproject/uapp/logout/'
 LOGIN_REDIRECT_URL = '/uproject/media/updater/'
 CACHE_BACKEND = 'db://listclient_cache'

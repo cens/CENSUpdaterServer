@@ -26,6 +26,20 @@ Ext.define('Updater.view.Viewer', {
     cls: 'preview',
     
     initComponent: function() {
+		var loginURL = "http://updater.mobilizingcs.org/uproject/uapp/login/";
+		var checkLoggedInURL = "http://updater.mobilizingcs.org/uproject/uapp/listAppNames/";
+		// Check to make sure we are logged-in
+		//  If we are not logged in, redirect to the login page
+		Ext.Ajax.request({
+			url: checkLoggedInURL,
+			success: function (response, options) {
+				if (response.responseText.substring(0,22) == "<!-- NOT_LOGGED_IN -->") {
+					window.location = loginURL;
+				}
+			}
+		});
+		
+		
 		Ext.override(Ext.LoadMask, {
 		     onHide: function() {
 		          this.callParent();

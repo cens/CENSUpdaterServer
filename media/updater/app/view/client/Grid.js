@@ -197,21 +197,17 @@ me.tbar = [
         scale: 'small'
     },
     items: [{
-        //xtype: 'splitbutton',
         text: 'New Client',
         tooltip: 'Add a new client to the Updater database',
         id: 'addClient',
         iconCls: 'ui-icon-add-user',
-        //handler: function() {},
         scope: this
-        //menu: [{text: 'Menu Item 1'}]
     },
     {
         text: 'Delete Selected',
         tooltip: 'Remove the selected client(s) from the Updater database',
         id: 'deleteSelected',
         iconCls: 'ui-icon-delete-user',
-        //handler: function() { Ext.Msg.alert('Warning', 'The following client(s) will be removed:'); },
         scope: this
     },
     {

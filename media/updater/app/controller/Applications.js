@@ -31,11 +31,8 @@ Ext.define('Updater.controller.Applications', {
 	}],
 
     init: function() {
-		//alert('wtf');
         this.control({
-			'#modifyGroupCombo': {
-				//select: this.selectGroup
-			},'applicationwindow > form > fieldset > container > combobox[fieldLabel="Name"]':{
+			'applicationwindow > form > fieldset > container > combobox[fieldLabel="Name"]':{
 				select: this.selectApp
 			},'applicationwindow > form > fieldset > container > combobox[fieldLabel="Release"]': {
 				select: this.selectRelease
@@ -51,8 +48,7 @@ Ext.define('Updater.controller.Applications', {
 				click: this.addRelease
 			},'#addVersionButton': {
 				click: this.addVersion
-			}
-			
+			}		
         });
     },
 	addApp: function () {

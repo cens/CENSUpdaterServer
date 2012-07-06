@@ -1,3 +1,7 @@
-Installation:
+About Updater version-2.0:
+--------------------------
+This version of MobilizeLabs' Updater is drastically different from the previous version. The front-end UI is developed completely in ExtJS 4. The backend is written in Django. The ExtJS UI is written using the MVC paradigm so that the application code can be easily managed and reused.
 
-This version of Updater depends on Django-haystack and Whoosh. Please make sure that both of these are installed, and that the Django settings.py file is configured appropriately to point to the correct Whoosh folder path. Lastly, make sure to chown the Whoosh folder to "apache:apache" so that the Apache process has read/write access to this folder. This is necessary, since this folder is used when the search index is rebuilt on-the-fly.
+Installation:
+-------------
+This version of Updater depends on Django-haystack and Whoosh. Please make sure that both of these are installed, and that the Django settings.py file is configured appropriately to point to the correct Whoosh folder path. Lastly, make sure to chown the Whoosh folder to "apache:apache" so that the Apache process has read/write access to this folder. This is necessary because this folder is used when the search index is rebuilt on-the-fly.

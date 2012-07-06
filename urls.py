@@ -14,7 +14,6 @@ urlpatterns = patterns('uapp.views',
 	(r'^uapp/getClientApps/(?P<imei>\w*)$', 'getClientApps'),
 	(r'^uapp/getClientTags/(?P<imei>\w*)$', 'getClientTags'),
 	(r'^uapp/getClientLogs/(?P<imei>\w*)$', 'getClientLogs'),
-	
 	(r'^uapp/deleteClients/$', 'deleteClients'),
 	(r'^uapp/getGroupApps/(?P<groupname>\w*)$', 'getGroupApps'),
 	(r'^uapp/add_group/$', 'add_group'),
@@ -25,27 +24,11 @@ urlpatterns = patterns('uapp.views',
 	(r'^uapp/getAppDetails/$', 'getAppDetails'),
 	(r'^uapp/getAppGroups/(?P<appname>\w*)/(?P<release>\w*)/(?P<version>\w*)$', 'getAppGroups'),
 	(r'^uapp/batchEditClients/(?P<validated>\w*)$', 'batchEditClients'),
-	
-	# Need to be re-written for data model change
-	(r'^uapp/logs/$', 'logs'),
 	(r'^uapp/get/(?P<imei>\w*)$', 'get'),
 	(r'^uapp/register/', 'register'),
-	#(r'^uapp/$', 'index'),
 	
-	
-	
-	
-	
-	
-    # Example:
-    # (r'^updates/', include('updates.foo.urls')),
-
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+	# Needs to be re-written for data model change
+	(r'^uapp/logs/$', 'logs'),
 )
 
 urlpatterns += patterns('',

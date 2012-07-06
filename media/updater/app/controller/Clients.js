@@ -1,3 +1,14 @@
+/*
+        Filename: Clients.js
+          Author: William Wu
+            Date: April 2012
+     Description: This class serves as the controller for the client views.
+				  It handles all the logic behind the main Clients section
+				  of Updater. It populates the Clients grid, handles click
+				  events when editing client details, dynamically loads
+				  client data, shows the "Edit Client Details" window,
+				  and more.
+*/
 Ext.define('Updater.controller.Clients', {
     extend: 'Ext.app.Controller',
 	requires: ['Updater.view.client.Details',
@@ -8,11 +19,8 @@ Ext.define('Updater.controller.Clients', {
 				'Ext.data.Connection',
 				'Ext.button.Button'],
     stores: ['Clients', 'Applications', 'Groups'],
-
     models: ['Client', 'Application', 'Group', 'Tag', 'Log', 'Conflict'],
-	
     views: ['client.Grid'],
-
     refs: [{
         ref: 'clientShow',
         selector: 'clientshow'
@@ -44,8 +52,10 @@ Ext.define('Updater.controller.Clients', {
 				click: this.performBasicSearch
 			},
 			'#basicSearchQuery': {
+				// Listens for when the return key is pressed
+				// after the user inputs text into the basic
+				// search field.
 				specialkey: Ext.bind(function(f,e) {
-					//console.log('yep');
 					if (e.getKey() == e.ENTER) {
 						this.performBasicSearch();
 					}
@@ -57,41 +67,40 @@ Ext.define('Updater.controller.Clients', {
         });
     },
 	performAdvancedSearch: function () {
-
+		// Get references to all of the advanced search fields
 		var groupField = Ext.ComponentQuery.query('#advancedSearchButton > textfield[fieldLabel="Group"]')[0];
 		var clientAppField = Ext.ComponentQuery.query('#advancedSearchButton > textfield[fieldLabel="Client Apps"]')[0];
 		var inheritedAppField = Ext.ComponentQuery.query('#advancedSearchButton > textfield[fieldLabel="Inherited Apps"]')[0];
 		var primaryTagsField = Ext.ComponentQuery.query('#advancedSearchButton > textfield[fieldLabel="Phone Tags"]')[0];
 		var secondaryTagsField = Ext.ComponentQuery.query('#advancedSearchButton > textfield[fieldLabel="Manual Tags"]')[0];
 		
-		
+		// Split up the comma-separated search queries
 		var clientAppParam = clientAppField.getValue().split(', ');
 		var inheritedAppParam = inheritedAppField.getValue().split(', ');
 		var primaryTagsParam = primaryTagsField.getValue().split(', ');
 		var secondaryTagsParam = secondaryTagsField.getValue().split(', ');
 	
+		// Construct the HTTP POST parameters
 		var postParams = {};
 	
 		if (groupField.isDirty()) {
 			postParams['group'] = groupField.getValue();
 		}
-	
 		if (clientAppField.isDirty()) {
 			postParams['user_apps'] = Ext.JSON.encode(clientAppParam);
 		}
-	
 		if (inheritedAppField.isDirty()) {
 			postParams['group_apps'] = Ext.JSON.encode(inheritedAppParam);
 		}
-		
 		if (primaryTagsField.isDirty()) {
 			postParams['phone_tags'] = Ext.JSON.encode(primaryTagsParam);
 		}
-		
 		if (secondaryTagsField.isDirty()) {
 			postParams['manual_tags'] = Ext.JSON.encode(secondaryTagsParam);
 		}
 	
+		// Perform the advanced search and store the results in an ExtJS
+		// data store
 		var advancedSearchStore = Ext.create('Ext.data.Store', {
 		    model: 'Updater.model.Client',
 			proxy: {

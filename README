@@ -1,0 +1,3 @@
+Installation:
+
+This version of Updater depends on Django-haystack and Whoosh. Please make sure that both of these are installed, and that the Django settings.py file is configured appropriately to point to the correct Whoosh folder path. Lastly, make sure to chown the Whoosh folder to "apache:apache" so that the Apache process has read/write access to this folder. This is necessary, since this folder is used when the search index is rebuilt on-the-fly.
